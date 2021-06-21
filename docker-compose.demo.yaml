@@ -1,0 +1,12 @@
+services:
+  demo-db:
+    image: postgres:${DEMO_DB_VERSION}
+    container_name: airbyte-demo-db
+    environment:
+      - POSTGRES_USER=${DEMO_DATABASE_USER}
+      - POSTGRES_PASSWORD=${DEMO_DATABASE_PASSWORD}
+    ports:
+      - 7651:5423
+    volumes:
+      - ../data/001_demo_source_db.sql:/docker-entrypoint-initdb.d/001_demo_source_db.sql
+      - ../data/002_demo_destination_db.sql:/docker-entrypoint-initdb.d/002_demo_destination_db.sql
